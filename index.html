@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PR Summarizer Bot</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>PR Summarizer Bot</h1>
+      <p class="subtitle">AI-powered Pull Request summaries and risk analysis</p>
+    </div>
+    <div class="header-actions">
+      <span id="backend-status" class="badge badge-unknown" role="status" aria-live="polite">Checking backend…</span>
+      <button id="refresh-btn" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="stats-heading">
+      <h2 id="stats-heading" class="visually-hidden">Summary statistics</h2>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Total analyzed PRs</span><span class="stat-value" id="stat-total">–</span></div>
+        <div class="stat stat-low"><span class="stat-label">Low risk</span><span class="stat-value" id="stat-low">–</span></div>
+        <div class="stat stat-medium"><span class="stat-label">Medium risk</span><span class="stat-value" id="stat-medium">–</span></div>
+        <div class="stat stat-high"><span class="stat-label">High risk</span><span class="stat-value" id="stat-high">–</span></div>
+      </div>
+      <p class="stat-extra" id="stat-extra"></p>
+    </section>
+
+    <section aria-labelledby="list-heading">
+      <div class="list-header">
+        <h2 id="list-heading">Pull requests</h2>
+        <div class="filters">
+          <label for="filter-risk">Risk
+            <select id="filter-risk">
+              <option value="">All</option>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+            </select>
+          </label>
+          <label for="filter-status">Status
+            <select id="filter-status">
+              <option value="">All</option>
+              <option value="success">Analyzed</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="failed">Failed</option>
+              <option value="skipped">Skipped</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+      <div id="list" class="list"></div>
+
+      <nav class="pager" aria-label="Pagination">
+        <button id="prev-btn" type="button" disabled>Previous</button>
+        <span id="page-info"></span>
+        <button id="next-btn" type="button" disabled>Next</button>
+      </nav>
+    </section>
+  </main>
+
+  <dialog id="detail-dialog" aria-labelledby="detail-title">
+    <div class="dialog-head">
+      <h2 id="detail-title">Details</h2>
+      <button id="detail-close" type="button" aria-label="Close details">Close</button>
+    </div>
+    <div id="detail-body"></div>
+  </dialog>
+
+  <script src="/script.js"></script>
+</body>
+</html>
